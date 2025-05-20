@@ -10,9 +10,14 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Configuration
 public class JdbcConfig {
 
+	private static final Logger logger = LoggerFactory.getLogger(JdbcConfig.class);
+	
     @Value("${spring.datasource.url}")
     private String url;
 
@@ -37,6 +42,7 @@ public class JdbcConfig {
 
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+    	logger.info("Creating JdbcTemplate");
         return new JdbcTemplate(dataSource);
     }
 }
